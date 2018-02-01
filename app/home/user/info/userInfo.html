@@ -1,0 +1,45 @@
+<div style="text-align:center;">
+  <form name="userForm" novalidate ng-submit="$ctrl.submitForm()">
+  <p class="form-group">Street:<br>
+    <input type="text"
+           name="street"
+           ng-model="$ctrl.user.address.street"
+           required/>
+     <div style="color:red" ng-show="userForm.street.$dirty && userForm.street.$invalid">
+       <span ng-show="userForm.street.$error.required">Street name is required</span>
+     </div>
+  </p>
+  <p class="form-group">Suite:<br>
+    <input type="text"
+           name="suite"
+           ng-model="$ctrl.user.address.suite"
+           required
+           ng-pattern="/^(?=.*\d).+$/"/>
+     <div style="color:red" ng-show="userForm.suite.$dirty && userForm.suite.$invalid">
+       <span ng-show="userForm.suite.$error.required">Suite is required</span>
+       <span ng-show="userForm.suite.$error.pattern">Suite needs to contain number</span>
+     </div>
+  </p>
+  <p class="form-group">City:<br>
+    <input type="text"
+           name="city"
+           ng-model="$ctrl.user.address.city"
+           required/>
+     <div style="color:red" ng-show="userForm.city.$dirty && userForm.city.$invalid">
+       <span ng-show="userForm.city.$error.required">City is required</span>
+     </div>
+  </p>
+  <p class="form-group">Company:<br>
+    <input type="text"
+           name="company"
+           ng-model="$ctrl.user.company.name"
+           required/>
+     <div style="color:red" ng-show="userForm.company.$dirty && userForm.company.$invalid">
+       <span ng-show="userForm.company.$error.required">Company is required</span>
+     </div>
+  </p>
+  <p>
+    <input type="submit" ng-disabled="userForm.$invalid">
+  </p>
+  <form>
+</div>
