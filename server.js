@@ -11,13 +11,15 @@ myapp.get('/',function(req,res){
   res.sendFile(path.join(__dirname+'/app/index.html'));
 });
 
-/*myapp.get('/user-lists',function(req,res){
+/*** needs read more about "HTML5 Push State" ***/
+myapp.get('/user-lists',function(req,res){
   res.sendFile(path.join(__dirname+'/app/index.html'));
-});*/
+});
 
-
-myapp.route('/api/users').get((req, res) => {
-  request.get({url: "https://jsonplaceholder.typicode.com/users/"}, function(error, response, body){
+myapp.route('/api/users/:id').get((req, res) => {
+  var id = req.params.id;
+  var apiUrl = id !== "undefined" ? "https://jsonplaceholder.typicode.com/users/" + id : "https://jsonplaceholder.typicode.com/users/";
+  request.get({url: apiUrl}, function(error, response, body){
      res.send(body);
   });
 });

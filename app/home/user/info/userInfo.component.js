@@ -11,7 +11,7 @@ angular.module("mainApp.home.user.info",[])
 
     self.$routerOnActivate = function(next){
       var userId = next.params.id;
-      usersService.getUserById(userId).then(function(data){
+      usersService.getUsers(userId).then(function(data){
         self.user = data;
       });
     };
@@ -23,6 +23,10 @@ angular.module("mainApp.home.user.info",[])
       self.user.address.city + "\n" + "Company Name: " +
       self.user.company.name);
       this.$router.navigate(['Users']);
+    }
+
+    self.onBlur = function(context){
+      console.log(context);
     }
   }
 
