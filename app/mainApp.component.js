@@ -1,7 +1,8 @@
 angular.module('mainApp',['ngComponentRouter',
 'mainApp.home.user.usersService',
 'mainApp.home.user.usersComponent',
-'mainApp.home.user.info'])
+'mainApp.home.user.info',
+'ui.bootstrap'])
 
 .config(function($locationProvider){
   $locationProvider.html5Mode(true);

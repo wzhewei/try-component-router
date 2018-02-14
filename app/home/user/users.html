@@ -1,5 +1,5 @@
 <div style="text-align:center;">
   <div ng-repeat="item in $ctrl.users" style="padding-top:10px">
-    <a style="color:black" route-link="{{item.name}}" href="./user-lists/{{item.id}}">{{item.name}}</a>
+    <a ng-class="{'modified-user' : item.isModified}" route-link="{{item.name}}" href="./user-lists/{{item.id}}">{{item.name}}</a>
   </div>
 </div>

@@ -1,11 +1,15 @@
-<div style="text-align:center;">
+<div class="modal-header">
+  <h3 class="modal-title">Update User Infomation</h3>
+</div>
+<div class="modal-body" style="text-align:center;">
   <form name="userForm" novalidate ng-submit="$ctrl.submitForm()">
-  <p class="form-group">Street:<br>
-    <input type="text"
+  <p class="form-group"><label for="form-street">Street:</label><br>
+    <input id="form-street"
+           type="text"
            ng-class="{'require' : userForm.street.$invalid}"
            name="street"
-           ng-model="$ctrl.user.address.street"
-           ng-model-options="{updateOn:'blur',debounce:{default:1000}}"
+           ng-model="$ctrl.ctrl.user.address.street"
+           ng-model-options="{updateOn:'blur'}"
            required/>
      <div style="color:red" ng-show="userForm.street.$dirty && userForm.street.$invalid">
        <span ng-show="userForm.street.$error.required">Street name is required</span>
@@ -15,9 +19,8 @@
     <input type="text"
            ng-class="{'require' : userForm.street.$invalid}"
            name="suite"
-           ng-model="$ctrl.user.address.suite"
-           ng-model-options="{updateOn:'blur',debounce:{default:1000}}"
-           ng-blur="$ctrl.onBlur(this)"
+           ng-model="$ctrl.ctrl.user.address.suite"
+           ng-model-options="{updateOn:'blur'}"
            required
            ng-pattern="/^(?=.*\d).+$/"/>
      <div style="color:red" ng-show="userForm.suite.$dirty && userForm.suite.$invalid">
@@ -29,8 +32,8 @@
     <input type="text"
            name="city"
            ng-class="{'require' : userForm.street.$invalid}"
-           ng-model="$ctrl.user.address.city"
-           ng-model-options="{updateOn:'blur',debounce:{default:1000}}"
+           ng-model="$ctrl.ctrl.user.address.city"
+           ng-model-options="{updateOn:'blur'}"
            required/>
      <div style="color:red" ng-show="userForm.city.$dirty && userForm.city.$invalid">
        <span ng-show="userForm.city.$error.required">City is required</span>
@@ -40,15 +43,16 @@
     <input type="text"
            ng-class="{'require' : userForm.street.$invalid}"
            name="company"
-           ng-model="$ctrl.user.company.name"
-           ng-model-options="{updateOn:'blur',debounce:{default:1000}}"
+           ng-model="$ctrl.ctrl.user.company.name"
+           ng-model-options="{updateOn:'blur'}"
            required/>
      <div style="color:red" ng-show="userForm.company.$dirty && userForm.company.$invalid">
        <span ng-show="userForm.company.$error.required">Company is required</span>
      </div>
   </p>
-  <p>
-    <input type="submit" ng-disabled="userForm.$invalid">
-  </p>
+  <div class="modal-footer">
+    <button class="btn-primary" type="submit" ng-click="$dismiss()" ng-disabled="userForm.$invalid">Submit</button>
+    <button class="btn-warning" type="button" ng-click="$ctrl.cancelSubmit();$dismiss()">Cancel</button>
+  </div>
   <form>
 </div>

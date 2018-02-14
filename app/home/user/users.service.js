@@ -7,4 +7,10 @@ var user = angular.module('mainApp.home.user.usersService', [])
     });
   };
 
+  this.updateUsers = function updateUsers (user) {
+    return $http.post('/api/users/add',{data:user}).then(function(){
+      return;
+    })
+  }
+
 });
