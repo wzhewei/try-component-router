@@ -3,5 +3,10 @@ input.ng-invalid {
 }
 
 button {
-  width: 50%;
+  width: 150px;
+  border: none;
+}
+
+.modal-footer button{
+   width: 50%;
 }
