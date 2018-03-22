@@ -28,16 +28,16 @@ myapp.use(bodyParser.urlencoded({
     extended: true
 }));
 myapp.use(bodyParser.json());
-myapp.use(express.static(__dirname + '/app'));
+myapp.use(express.static(__dirname + '/dist'));
 myapp.use('/node_modules', express.static(__dirname + '/node_modules'));
 
 myapp.get('/',function(req,res){
-  res.sendFile(path.join(__dirname+'/app/index.html'));
+  res.sendFile(path.join(__dirname+'/dist/index.html'));
 });
 
 /*** needs read more about "HTML5 Push State" ***/
 myapp.get('/user-lists',function(req,res){
-  res.sendFile(path.join(__dirname+'/app/index.html'));
+  res.sendFile(path.join(__dirname+'/dist/index.html'));
 });
 
 myapp.route('/api/users/:id').get((req, res) => {
