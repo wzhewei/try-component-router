@@ -1,0 +1,7 @@
+<h1 style="font-size:18px;text-align:center;">ZheWei's Blogs</h1>
+
+<div style="text-align:center;">
+  <div ng-repeat="item in $ctrl.blogs" style="padding-top:10px">
+      <button style="background: none; border: none;" ng-click="$ctrl.onClickBlogs({blogId:item.id})">{{item.name}}</button>
+  </div>
+</div>

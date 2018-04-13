@@ -4,25 +4,8 @@ const myapp = express()
 const path = require('path')
 const request = require('request')
 const _ = require('underscore')
-var user = null;
-var userList = null;
-var updated_user = null;
-
-/*TODO trying open redis server */
-
-/*const redisServer = require('redis-server')
-const server = new redisServer(6379)
-const redis = require('redis')
-const client = redis.createClient()*/
-
-/*server.open(function(err){
-  if(err == null){
-    client.on('connect', function(){
-      console.log("redis connected!!");
-    })
-  }
-})*/
-
+var blogs = null;
+var posts = null;
 
 myapp.use(bodyParser.urlencoded({
     extended: true
@@ -35,46 +18,22 @@ myapp.get('/',function(req,res){
   res.sendFile(path.join(__dirname+'/dist/index.html'));
 });
 
-/*** needs read more about "HTML5 Push State" ***/
-myapp.get('/user-lists',function(req,res){
-  res.sendFile(path.join(__dirname+'/dist/index.html'));
-});
-
-myapp.route('/api/users/:id').get((req, res) => {
+myapp.route('/api/blog/posts/:id').get((req, res) => {
   var id = req.params.id;
-  var hasId = id !== "undefined";
-  var apiUrl = hasId ? "https://jsonplaceholder.typicode.com/users/" + id : "https://jsonplaceholder.typicode.com/users/";
+  var apiUrl = "https://www.googleapis.com/blogger/v3/blogs/" + id + "/posts?key=AIzaSyBs5or1JzSHCTDtrn-PeHqZgvP6wp3qafo";
   request.get({url: apiUrl}, function(error, response, body){
-     if(!userList && !hasId){
-       userList = JSON.parse(body);
-
-     }else{
-       if(hasId){
-         _.each(userList,function(item,index){
-           if(index == id){
-             user = item;
-           }
-         });
-       }
-     }
-     //Send back userList or each user info.
-     if(hasId){
-       res.send(user);
-     }
-     else {
-       res.send(userList);
-     }
+     posts = JSON.parse(body);
+     res.send(posts);
   });
 });
 
-myapp.route('/api/users/add').post((req, res) => {
-  updated_user = req.body.data;
-  _.each(userList,function(user,index){
-    if(updated_user.id == user.id){
-      userList[index] = _.extend(updated_user,{isModified:true});
-    }
-  })
-  res.send("user updated");
+myapp.route('/api/blogs/:id').get((req, res) => {
+  var id = req.params.id;
+  var apiUrl = "https://www.googleapis.com/blogger/v3/blogs/" + id + "?key=AIzaSyBs5or1JzSHCTDtrn-PeHqZgvP6wp3qafo";
+  request.get({url: apiUrl}, function(error, response, body){
+     blogs = JSON.parse(body);
+     res.send(blogs);
+  });
 });
 
 
